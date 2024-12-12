@@ -2,7 +2,11 @@ package com.example.springbootapp.controller;
 
 import com.example.springbootapp.model.document.Document;
 import com.example.springbootapp.model.document.DocumentRequestDTO;
+import com.example.springbootapp.model.request.Request;
+import com.example.springbootapp.model.request.RequestRequestDTO;
+import com.example.springbootapp.model.user.User;
 import com.example.springbootapp.service.DocumentService;
+import com.example.springbootapp.service.RequestService;
 import com.example.springbootapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +26,6 @@ public class DocumentController {
 
     @PostMapping("/create-document")
     public Document createDocument(@RequestBody DocumentRequestDTO request) throws Exception {
-        // System.out.println("TAG " + request.getTitle());
         Document document = new Document();
         document.setTitle(request.getTitle());
         document.setDescription(request.getDescription());
@@ -34,7 +37,7 @@ public class DocumentController {
 
     @PostMapping("/{documentId}/download")
     public ResponseEntity<byte[]> downloadDocument(@PathVariable Integer documentId) throws Exception {
-        Document document = documentService.getDocumentById(documentId);
+        Document document = documentService.findById(documentId);
         return ResponseEntity
                 .ok()
                 .header(

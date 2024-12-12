@@ -48,6 +48,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         }
+        System.out.println("JWT Token: " + token);
+        System.out.println("Extracted Username: " + username);
         filterChain.doFilter(request, response);
     }
 }

@@ -3,6 +3,7 @@ package com.example.springbootapp.service;
 import com.example.springbootapp.model.document.Document;
 import com.example.springbootapp.repository.DocumentRepository;
 import com.example.springbootapp.util.PdfUtil;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class DocumentService {
         return documentRepository.save(document);
     }
 
-    public Document getDocumentById(Integer id) throws Exception {
-        return documentRepository.findById(id).get();
+    public Document findById(Integer id) {
+        return documentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Document not found!"));
     }
 }

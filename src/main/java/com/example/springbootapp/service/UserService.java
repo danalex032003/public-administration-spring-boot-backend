@@ -2,6 +2,7 @@ package com.example.springbootapp.service;
 
 import com.example.springbootapp.model.user.User;
 import com.example.springbootapp.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,6 +40,6 @@ public class UserService {
     }
 
     public User findById (Integer id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 }
