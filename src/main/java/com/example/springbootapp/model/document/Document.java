@@ -2,6 +2,7 @@ package com.example.springbootapp.model.document;
 
 import com.example.springbootapp.model.user.User;
 import com.example.springbootapp.util.DocumentTypesUtil;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -41,11 +42,7 @@ public class Document {
     @Column(nullable = false, name = "package_type")
     private DocumentTypesUtil.DocumentPackageTypeEnum packageType;
 
-    @Column(nullable = false, name = "specific_type")
-    private String specificType;
-
-    @Lob
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "LONGBLOB")
     private byte[] content;
 
     @ManyToOne(fetch = FetchType.LAZY)

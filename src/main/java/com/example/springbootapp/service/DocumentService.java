@@ -7,20 +7,28 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DocumentService {
 
     @Autowired
     private DocumentRepository documentRepository;
 
-    public Document createDocument(Document document) throws Exception {
-        String content = "Title: " + document.getTitle() + "Description: " + document.getDescription();
-        byte[] pdfBytes = PdfUtil.generatePdf(document.getTitle(), content);
-        document.setContent(pdfBytes);
+    public Document createDocument(Document document) {
+
         return documentRepository.save(document);
     }
 
     public Document findById(Integer id) {
         return documentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Document not found!"));
+    }
+
+    public List<Document> getAllDocuments(Integer userId) {
+        return documentRepository.findAll();
+    }
+
+    public List<Document> getAllDocuments() {
+        return documentRepository.findAll();
     }
 }

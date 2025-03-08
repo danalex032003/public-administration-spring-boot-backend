@@ -23,21 +23,33 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
+
     @Column(unique = true, nullable = false)
     @NotBlank(message = "Username cannot be blank!")
     private String username;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
     @Column(unique = true)
     @Email(message = "Invalid email address")
     private String email;
+
     @Column(nullable = false)
     @NotBlank(message = "Password cannot be blank!")
     private String password;
+
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private Date createdAt;
+
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "role")
     private RoleEnum role;

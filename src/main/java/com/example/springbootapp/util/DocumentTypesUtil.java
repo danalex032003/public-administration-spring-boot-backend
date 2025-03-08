@@ -8,6 +8,6 @@ public class DocumentTypesUtil {
         MEANS_OF_TRANSPORT,
         DISPLAY_FOR_ADVERTISING,
         REQUESTS,
-        OTHER
+        OTHERS
     }
 }
